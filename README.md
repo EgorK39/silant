@@ -24,6 +24,7 @@ python manage.py migrate
 python manage.py makesuperuser
 12. Затем опять переходим в postgres
 13. !!! Далее копируете прям весь текст ниже или можете вводить построчно (лучше сразу все). Здесь мы создаем начальные данные в БД:
+Тут Важно верно указать пути до местоположения файлов. Пути должны быть абсолютными. Нужно будет Вам немного исправить под себя.
 
 
 COPY auth_user FROM '/mnt/d/USER/Documents/ALL_PROJECTS/silant/DB_DATA/Users/users.csv' DELIMITER ';' CSV HEADER encoding 'windows-1251';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../../styles/CarSearch.scss';
-import {useState, useEffect, lazy} from "react";
+import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Tos from "./Tos";
 
@@ -288,7 +288,7 @@ export default function ToMain(props) {
                                 className={"searchUl"}
 
                             >
-                                {type ? type.type.map((el, i) =>
+                                {type ? type.map((el, i) =>
                                     <li key={el.id}>{el.name}</li>
                                 ) : ''}
                             </ul>
