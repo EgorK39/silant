@@ -80,7 +80,7 @@ npm run start
 22. При создании нового пользователя нужно его обязательно довабить в одну из групп.
 
 
-dont use this =>
+dont use this (то что ниже, использовать не надо) =>
 COPY silant_app_listoforg FROM '/mnt/d/USER/Documents/ALL_PROJECTS/silant/DB_DATA/To/ListOfOrg.csv' DELIMITER ';' CSV HEADER encoding 'windows-1251';
 ALTER SEQUENCE silant_app_listoforg_id_seq restart with 5;
 
