@@ -1,0 +1,12 @@
+ID;password;last_login;is_superuser;username;first_name;last_name;email;is_staff;is_active;date_joined
+2;qwerty;"""2023-08-02""";False;ip_trudnikov;ИП Трудников С.В.;some_info;default@mail.ru;False;True;"""2023-08-01"""
+3;qwerty;"""2023-08-03""";False;fpk21;"ООО ""ФПК21""";some_info;default@mail.ru;False;True;"""2023-08-01"""
+4;qwerty;"""2023-08-03""";False;mns77;"ООО ""МНС77""";some_info;default@mail.ru;False;True;"""2023-08-01"""
+5;qwerty;"""2023-08-03""";False;ransky_lph;"ООО ""Ранский ЛПХ""";some_info;default@mail.ru;False;True;"""2023-08-01"""
+6;qwerty;"""2023-08-03""";False;complekt_postavka;"ООО ""Комплект-Поставка""";some_info;default@mail.ru;False;True;"""2023-08-01"""
+7;qwerty;"""2023-08-03""";False;rmk;"ООО ""РМК""";some_info;default@mail.ru;False;True;"""2023-08-01"""
+8;qwerty;"""2023-08-03""";False;zander;"АО ""Зандер""";some_info;default@mail.ru;False;True;"""2023-08-01"""
+9;qwerty;"""2023-08-03""";False;prom_teh;ООО Промышленная техника;some_info;default@mail.ru;False;True;"""2023-08-01"""
+10;qwerty;"""2023-08-03""";False;silant;ООО Силант;some_info;default@mail.ru;False;True;"""2023-08-01"""
+11;qwerty;"""2023-08-03""";False;fns;ООО ФНС;some_info;default@mail.ru;False;True;"""2023-08-01"""
+12;qwerty;"""2023-08-03""";False;by_yourself;самостоятельно;самостоятельно;by_yourself@mail.ru;False;True;"""2023-08-01"""
