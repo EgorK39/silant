@@ -26,20 +26,25 @@ export default function App(props) {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('token'));
-        if (token.access) {
-            console.log(token)
-            console.log(token.access)
-            setIsAuthenticated(true)
+        if (token) {
+            if (token.access) {
+                console.log(token)
+                console.log(token.access)
+                setIsAuthenticated(true)
+            } else {
+                const interval = setInterval(() => {
+                    const token = JSON.parse(localStorage.getItem('token'));
+                    if (token.access) {
+                        setIsAuthenticated(true)
+                        clearInterval(interval)
+                    }
+                }, 1500)
+            }
         } else {
-            const interval = setInterval(() => {
-                const token = JSON.parse(localStorage.getItem('token'));
-                if (token.access) {
-                    setIsAuthenticated(true)
-                    clearInterval(interval)
-                }
-            }, 1500)
+            localStorage.setItem('token', JSON.stringify(''))
         }
     }, []);
 

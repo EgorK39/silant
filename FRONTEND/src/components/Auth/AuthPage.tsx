@@ -69,7 +69,7 @@ export default function AuthPage(props) {
                 'refresh': data.refresh
             }))
             // TODO
-            navigate('/manager')
+            navigate('/manager', {replace: true})
             // TODO navigate('/')
         }
     }

@@ -8,7 +8,7 @@ export default function ToMain(props) {
     const [vin, setVin] = useState('');
     const [isFiltered, setIsFiltered] = useState(false);
     const [allTo, setAllTo] = useState<any>(null);
-    const [filteredTo, setFilteredTo] = useState([]);
+    const [filteredTo, setFilteredTo] = useState(null);
 
     const [type, setType] = useState<any>([])
     const [autos, setAutos] = useState<any>([])
@@ -29,10 +29,8 @@ export default function ToMain(props) {
     const [toggleCompanyTwo, setToggleCompanyTwo] = useState(false)
 
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
-
     const [isReady, setIsReady] = useState(false)
-
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     const navigate = useNavigate();
 
@@ -51,7 +49,12 @@ export default function ToMain(props) {
                         },
                     })
                         .then(async res => {
-                            setType(await res.json())
+                            return await res.json();
+                        })
+                        .then(data => {
+                            console.log(data)
+                            setType(data.type);
+
                         })
                         .catch(err =>
                             console.log(err))
@@ -164,7 +167,7 @@ export default function ToMain(props) {
         const token = JSON.parse(localStorage.getItem('token'))
         if (token.access) {
             console.log('auth')
-            fetch(`${props.defaultURL}to/?to__in=&car__vin__iendswith=&whoMakeTo__in=&whoMakeTo__name__icontains=&serviceCompany__in=&serviceCompany__name__icontains=`,
+            fetch(`${props.defaultURL}to/?to__in=${typeMod}&car__vin__iendswith=${vin}&whoMakeTo__in=${whoMod}&whoMakeTo__name__icontains=&serviceCompany__in=${companyMod}&serviceCompany__name__icontains=`,
                 {
                     method: 'GET',
                     headers: {
@@ -194,8 +197,8 @@ export default function ToMain(props) {
         return value.replace(/\s/g, "").match(/.{1,2}/g)?.join(" ") || ""
     }
     const myTypeToggleFunc = (target) => {
-        const typeId = type.type.find(type => type.name === target.textContent).id
-        setType(typeId)
+        const typeId = type.find(type => type.name === target.textContent).id
+        setTypeMod(typeId)
     }
     const myWhoToggleFunc = (target) => {
         const companyId = company.find(company => company.name === target.textContent).id
@@ -229,10 +232,17 @@ export default function ToMain(props) {
 
         }
     }
+
+    useEffect(() => {
+        const token = JSON.parse(localStorage.getItem('token'))
+        if (token.access) {
+            setIsAuthenticated(true)
+        }
+    }, [])
     return (
         <>
             <div className={'carSearchMain'}>
-                {props.isAuthenticated ? <h3 className={'myH'}>Проверьте комплектацию и технические характеристики Вашей
+                {isAuthenticated ? <h3 className={'myH'}>Проверьте комплектацию и технические характеристики Вашей
                         техники Силант</h3> :
                     <h3 className={'myH'}>Проверьте комплектацию и технические характеристики
                         техники Силант</h3>}
@@ -288,7 +298,7 @@ export default function ToMain(props) {
                                 className={"searchUl"}
 
                             >
-                                {type ? type.map((el, i) =>
+                                {type.length ? type.map((el, i) =>
                                     <li key={el.id}>{el.name}</li>
                                 ) : ''}
                             </ul>
@@ -383,19 +393,19 @@ export default function ToMain(props) {
                 </div>
             </div>
             {
-                isFiltered ? (
+                (isFiltered && (autos.length > 1) && (type.length > 1) && (company.length > 1) && filteredTo) ? (
                     <Tos allTo={filteredTo}
                          autos={autos}
                          type={type}
                          company={company}
                     />
-                ) : (
+                ) : (allTo && (autos.length > 1) && (type.length > 1) && (company.length > 1)) ? (
                     <Tos allTo={allTo}
                          autos={autos}
                          type={type}
-                         company={company.company}
+                         company={company}
                     />
-                )
+                ) : ''
             }
         </>
     )

@@ -6,9 +6,16 @@ export default function Tos(props) {
     const navigate = useNavigate();
     const goBack = () => navigate(-1);
     const {id} = useParams();
+    useEffect(() => {
+        console.log(props.allTo)
+        console.log(props.type)
+        console.log(props.company)
+        console.log(props.autos)
 
+    }, [])
     return (
-        (((props.allTo) && (props.autos.length > 1) && (props.type.length > 1) && (props.company.length > 1)) ?
+        ((props.allTo == null && !props.type.length && !props.company.length && !props.autos.length) ?
+                '' :
                 <section className={'myDetailCar'}>
                     <div className={'carNonFiltered'}>
                         <table className={'myTable'}>
@@ -26,29 +33,32 @@ export default function Tos(props) {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>{props.type.length >= 1 ? props.type.find(
-                                    type => type.id === props.allTo['to']
-                                ).name : props.allTo['to']}</td>
-                                <td>{props.allTo['dateOfTo']}</td>
-                                <td>{props.allTo['work']}</td>
-                                <td>{props.allCar['dateOfOrder']}</td>
-                                <td>{props.company.length >= 1 ? props.company.find(
-                                    company => company.id === props.allTo['whoMakeTo']
-                                ).name : props.allTo['whoMakeTo']}</td>
-                                <td>{props.autos.length >= 1 ? props.autos.find(
-                                    autos => autos.id === props.allTo['car']
-                                ).vin : props.allTo['car']}</td>
-                                <td>{props.company.length >= 1 ? props.company.find(
-                                    company => company.id === props.allTo['car']
-                                ).name : props.allTo['serviceCompany']}</td>
-                            </tr>
+                            {props.allTo.map((el, i) =>
+                                <tr key={el.id}>
+                                    <td>{props.type ? props.type.find(
+                                        type => type.id === el['to']
+                                    ).name : el['to']}</td>
+                                    <td>{el['dateOfTo']}</td>
+                                    <td>{el['work']}</td>
+                                    <td>{el['order']}</td>
+                                    <td>{el['dateOfOrder']}</td>
+                                    <td>{props.company ? props.company.find(
+                                        company => company.id === el['whoMakeTo']).name : el['whoMakeTo']}</td>
+                                    <td>{props.autos ? props.autos.find(
+                                        autos => autos.id === el['car']
+                                    ).vin : el['car']}</td>
+                                    <td>{props.company ? props.company.find(
+                                        company => company.id === el['serviceCompany']
+                                    ).name : el['serviceCompany']}</td>
+                                </tr>
+                            )}
+
                             </tbody>
                         </table>
                     </div>
                     <button className={'btnOneOfCars'} onClick={e => goBack()}>Назад</button>
-                </section> :
-                ''
+                </section>
+
         )
     )
 }
