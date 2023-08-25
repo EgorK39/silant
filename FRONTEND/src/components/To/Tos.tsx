@@ -35,21 +35,23 @@ export default function Tos(props) {
                             <tbody>
                             {props.allTo.map((el, i) =>
                                 <tr key={el.id}>
-                                    <td>{props.type ? props.type.find(
+                                    <td><Link to={`/to/show/type/${el['to']}`}>{props.type ? props.type.find(
                                         type => type.id === el['to']
-                                    ).name : el['to']}</td>
+                                    ).name : el['to']}</Link></td>
                                     <td>{el['dateOfTo']}</td>
                                     <td>{el['work']}</td>
                                     <td>{el['order']}</td>
                                     <td>{el['dateOfOrder']}</td>
-                                    <td>{props.company ? props.company.find(
-                                        company => company.id === el['whoMakeTo']).name : el['whoMakeTo']}</td>
-                                    <td>{props.autos ? props.autos.find(
+                                    <td><Link
+                                        to={`/car/company/${el['serviceCompany']}`}>{props.company ? props.company.find(
+                                        company => company.id === el['whoMakeTo']).name : el['whoMakeTo']}</Link></td>
+                                    <td><Link to={`/car/${el['car']}`}>{props.autos ? props.autos.find(
                                         autos => autos.id === el['car']
-                                    ).vin : el['car']}</td>
-                                    <td>{props.company ? props.company.find(
+                                    ).vin : el['car']}</Link></td>
+                                    <td><Link
+                                        to={`/car/company/${el['serviceCompany']}`}>{props.company ? props.company.find(
                                         company => company.id === el['serviceCompany']
-                                    ).name : el['serviceCompany']}</td>
+                                    ).name : el['serviceCompany']}</Link></td>
                                 </tr>
                             )}
 

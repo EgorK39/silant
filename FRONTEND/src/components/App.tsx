@@ -3,7 +3,7 @@ import '../styles/App.scss';
 import Header from './Header/Header';
 import CarMain from './Car/CarMain';
 import {
-    Route, Routes
+    Route, Routes, useNavigate
 } from 'react-router-dom';
 import Api from './Api/Api';
 import DetailCar from './Car/DetailCar';
@@ -22,13 +22,15 @@ import ToMain from "./To/ToMain";
 import ReclamationMain from "./Reclamation/ReclamationMain";
 import ShowRejection from "./Reclamation/Services/ShowRejection";
 import ShowRecovery from "./Reclamation/Services/ShowRecovery";
+import ShowType from "./To/Services/ShowType";
 
 export default function App(props) {
 
     const defaultURL = 'http://127.0.0.1:8000/api/v1/'
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-
+    const [userName, setUserName] = useState<string>('')
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('token'));
@@ -50,6 +52,46 @@ export default function App(props) {
             localStorage.setItem('token', JSON.stringify(''))
         }
     }, []);
+
+    const dropPassword = () => {
+        localStorage.setItem('token', JSON.stringify(''))
+        navigate('/auth', {replace: true})
+        navigate(0)
+    }
+    useEffect(() => {
+        const token = JSON.parse(localStorage.getItem('token'))
+        if (token) {
+            if (token.access) {
+                console.log('auth')
+                fetch(`${defaultURL}car/getname`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token.access}`
+                        },
+                    })
+                    .then(async res => {
+                        if (res.status != 200) {
+                            console.log(res)
+                            console.log(res.status)
+                            console.log(typeof res.status)
+                            dropPassword()
+                        } else {
+                            console.log(res)
+                            return await res.json();
+                        }
+                    })
+                    .then(data => {
+                        console.log(data.name)
+                        setUserName(data.name)
+                    })
+
+                    .catch(err =>
+                        console.log(err))
+            }
+        }
+    }, [])
 
     return (
         <>
@@ -78,6 +120,7 @@ export default function App(props) {
                             <Route path={'manager'} element={<ManagerMain defaultURL={defaultURL}/>}/>
                             <Route path={'manager/car/:id'} element={<CarEdit defaultURL={defaultURL}/>}/>
                             <Route path={'to'} element={<ToMain defaultURL={defaultURL}/>}/>
+                            <Route path={'to/show/type/:id'} element={<ShowType defaultURL={defaultURL}/>}/>
                             <Route path={'rec'} element={<ReclamationMain defaultURL={defaultURL}/>}/>
                             <Route path={'rec/show/rejection/:id'} element={<ShowRejection defaultURL={defaultURL}/>}/>
                             <Route path={'rec/show/recovery/:id'} element={<ShowRecovery defaultURL={defaultURL}/>}/>

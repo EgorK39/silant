@@ -100,6 +100,20 @@ class CarsViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_class = CarFilter
 
     @action(methods=['get'], detail=False)
+    def getname(self, request):
+        user = request.user.pk
+        print(user)
+        if User.objects.get(pk=user).groups.filter(name='client').exists():
+            name = ModelOfClients.client.get(namesOfUsers=User.objects.get(pk=user)).name
+            return Response({'name': name})
+        elif User.objects.get(pk=user).groups.filter(name='organization').exists():
+            name = ModelOfServiceCompany.company.get(namesOfUsers=User.objects.get(pk=user)).name
+            return Response({'name': name})
+        else:
+            name = User.objects.get(pk=user).username
+            return Response({'name': name})
+
+    @action(methods=['get'], detail=False)
     def client(self, request):
         client = ModelOfClients.client.all()
         return Response(

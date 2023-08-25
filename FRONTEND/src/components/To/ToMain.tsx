@@ -242,10 +242,8 @@ export default function ToMain(props) {
     return (
         <>
             <div className={'carSearchMain'}>
-                {isAuthenticated ? <h3 className={'myH'}>Проверьте комплектацию и технические характеристики Вашей
-                        техники Силант</h3> :
-                    <h3 className={'myH'}>Проверьте комплектацию и технические характеристики
-                        техники Силант</h3>}
+                {isAuthenticated ? <h3 className={'myH'}>Информация о проведенных ТО Вашей техники</h3> :
+                    <h3 className={'myH'}>Информация о проведенных ТО</h3>}
                 <div className={'inAndBtn'}>
                     <input className={'vinInput'}
                            name={'vin'}
@@ -388,8 +386,8 @@ export default function ToMain(props) {
                 </div>
                 <h3 className={'myH'}>Результат поиска:</h3>
                 <div className={'textInCarSearch'}>
-                    <span>Информация о комплектации и технических</span>
-                    <span>характеристиках техники</span>
+                    <span>Информация о проведенных ТО Вашей техники</span>
+                    {/*<span>характеристиках техники</span>*/}
                 </div>
             </div>
             {

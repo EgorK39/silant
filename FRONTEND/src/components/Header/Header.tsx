@@ -14,6 +14,7 @@ export default function Header(props) {
         // window.location.reload();
     }
 
+
     return (
         <>
             <section className={'myHeader PT-Astra-Sans_Regular'}>

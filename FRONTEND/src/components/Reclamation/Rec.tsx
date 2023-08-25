@@ -39,7 +39,7 @@ export default function Tos(props) {
                                 <tr key={el.id}>
                                     <td>{el['dateOfRejection']}</td>
                                     <td>{el['work']}</td>
-                                    <td>{props.rejection ? el['nodeOfRejection'].map((e, i) =>
+                                    <td>{props.rejection.length >= 1 ? el['nodeOfRejection'].map((e, i) =>
                                             <span key={i}>
                                                 <Link to={`/rec/show/rejection/${e}`}>
                                         {props.rejection.find(rejection => rejection.id === e).name}
@@ -47,7 +47,7 @@ export default function Tos(props) {
                                     </span>
                                     ) : el['nodeOfRejection'][0]}</td>
                                     <td>{el['description']}</td>
-                                    <td>{props.recovery ? el['recovery'].map((e, i) =>
+                                    <td>{props.recovery.length >= 1 ? el['recovery'].map((e, i) =>
                                             <span key={i}><Link to={`/rec/show/recovery/${e}`}>
                                         {props.recovery.find(recovery => recovery.id === e).name}
                                                 </Link>

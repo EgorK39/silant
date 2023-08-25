@@ -34,8 +34,10 @@ class ReclamationFilter(filters.FilterSet):
     class Meta:
         model = Reclamation
         fields = {
-            'nodeOfRejection__name': ['icontains', 'in'],
-            'recovery__name': ['icontains', 'in'],
+            # 'nodeOfRejection__name': ['icontains', 'in'],
+            # 'recovery__name': ['icontains', 'in'],
+            'nodeOfRejection': ['exact'],
+            'recovery': ['exact'],
             'serviceCompany': ['in'],
             'serviceCompany__name': ['icontains'],
 

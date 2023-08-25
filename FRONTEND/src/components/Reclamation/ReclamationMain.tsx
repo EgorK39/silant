@@ -5,6 +5,10 @@ import {useNavigate} from 'react-router-dom';
 import Rec from './Rec';
 
 export default function ReclamationMain(props) {
+    const [searchURL, setSearchURL] = useState<string>('');
+    const [myURL, setMyURL] = useState<string>('')
+
+
     const [vin, setVin] = useState('');
     const [isFiltered, setIsFiltered] = useState(false);
     const [allRec, setAllRec] = useState<any>(null);
@@ -172,6 +176,7 @@ export default function ReclamationMain(props) {
                     } else {
                         console.log(res)
                         setAllRec(await res.json());
+                        setSearchURL('rec/client')
                         setIsReady(true)
                     }
                 })
@@ -199,6 +204,7 @@ export default function ReclamationMain(props) {
                 } else {
                     console.log(res)
                     setAllRec(await res.json());
+                    setSearchURL('rec');
                     setIsReady(true)
                 }
             })
@@ -206,13 +212,19 @@ export default function ReclamationMain(props) {
             .catch(err =>
                 console.log(err))
     }
-
     const btn = () => {
+        if (rejectionMod && recoveryMod) {
+            setMyURL(`nodeOfRejection__exact=${rejectionMod}&recovery__exact=${recoveryMod}&`)
+        } else if (rejectionMod) {
+            setMyURL(`nodeOfRejection=${rejectionMod}&`)
+        } else if (recoveryMod) {
+            setMyURL(`recovery=${recoveryMod}&`)
+        }
         console.log(JSON.parse(localStorage.getItem('token')))
         const token = JSON.parse(localStorage.getItem('token'))
         if (token.access) {
             console.log('auth')
-            fetch(`${props.defaultURL}to/`,
+            fetch(`${props.defaultURL}${searchURL}/?${myURL}serviceCompany__in=${companyMod}`,
                 {
                     method: 'GET',
                     headers: {
@@ -245,6 +257,7 @@ export default function ReclamationMain(props) {
         const rejectionId = rejection.find(rejection => rejection.name === target.textContent).id
         setRejectionMod(rejectionId)
     }
+
     const myRecoveryToggleFunc = (target) => {
         const recoveryId = recovery.find(recovery => recovery.name === target.textContent).id
         setRecoveryMod(recoveryId)
@@ -287,26 +300,24 @@ export default function ReclamationMain(props) {
     return (
         <>
             <div className={'carSearchMain'}>
-                {isAuthenticated ? <h3 className={'myH'}>Проверьте комплектацию и технические характеристики Вашей
-                        техники Силант</h3> :
-                    <h3 className={'myH'}>Проверьте комплектацию и технические характеристики
-                        техники Силант</h3>}
+                {isAuthenticated ? <h3 className={'myH'}>Рекламации</h3> :
+                    <h3 className={'myH'}>Рекламации</h3>}
                 <div className={'inAndBtn'}>
-                    <input className={'vinInput'}
-                           name={'vin'}
-                           autoComplete={'off'}
-                           onChange={event => {
-                               const {value} = event.target
-                               event.target.value = normalizeNumber(value)
+                    {/*<input className={'vinInput'}*/}
+                    {/*       name={'vin'}*/}
+                    {/*       autoComplete={'off'}*/}
+                    {/*       onChange={event => {*/}
+                    {/*           const {value} = event.target*/}
+                    {/*           event.target.value = normalizeNumber(value)*/}
 
 
-                               setVin(event.target.value)
-                               console.log(event.target)
-                           }}
-                           maxLength={15}
-                           placeholder={'Зав. № машины'}
+                    {/*           setVin(event.target.value)*/}
+                    {/*           console.log(event.target)*/}
+                    {/*       }}*/}
+                    {/*       maxLength={15}*/}
+                    {/*       placeholder={'Зав. № машины'}*/}
 
-                    />
+                    {/*/>*/}
 
                     <div className={'myRelative'}>
                         <input className={'vinInput'}
@@ -386,7 +397,7 @@ export default function ReclamationMain(props) {
                                 className={"searchUl"}
 
                             >
-                                {rejection.length ? rejection.map((el, i) =>
+                                {recovery.length ? recovery.map((el, i) =>
                                     <li key={el.id}>{el.name}</li>
                                 ) : ''}
                             </ul>
@@ -439,8 +450,8 @@ export default function ReclamationMain(props) {
                 </div>
                 <h3 className={'myH'}>Результат поиска:</h3>
                 <div className={'textInCarSearch'}>
-                    <span>Информация о комплектации и технических</span>
-                    <span>характеристиках техники</span>
+                    <span>Информация о жалобах</span>
+                    {/*<span>характеристиках техники</span>*/}
                 </div>
             </div>
             {
