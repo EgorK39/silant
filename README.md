@@ -19,8 +19,10 @@
 11. Переходим далее:
     cd silant
 12. Делаем миграции:
-    python manage.py makemigrations
-    python manage.py migrate
+    <ul>
+    <li>python manage.py makemigrations</li>
+    <li>python manage.py migrate</li>
+    </ul>
 13. Создаем супер-пользователя КОМАНДОЙ:
     python manage.py makesuperuser
 14. Переходим в postgres

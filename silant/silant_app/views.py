@@ -123,6 +123,30 @@ class CarsViewSet(viewsets.ReadOnlyModelViewSet):
         company = ModelOfServiceCompany.company.get(pk=pk)
         return Response({'company': [company.id, company.name, company.description]})
 
+    @action(methods=['get'], detail=False)
+    def rejection(self, request):
+        rejection = Rejection.objects.all()
+        return Response(
+            {'rejection': [{'id': t.id, 'name': t.name, 'description': t.description} for t
+                           in rejection]})
+
+    @action(methods=['get'], detail=True)
+    def detailrejection(self, request, pk=None):
+        rejection = Rejection.objects.get(pk=pk)
+        return Response({'rejection': [rejection.id, rejection.name, rejection.description]})
+
+    @action(methods=['get'], detail=False)
+    def recovery(self, request):
+        recovery = RecoveryMethod.objects.all()
+        return Response(
+            {'recovery': [{'id': t.id, 'name': t.name, 'description': t.description} for t
+                          in recovery]})
+
+    @action(methods=['get'], detail=True)
+    def detailrecovery(self, request, pk=None):
+        recovery = RecoveryMethod.objects.get(pk=pk)
+        return Response({'recovery': [recovery.id, recovery.name, recovery.description]})
+
     def get_queryset(self):  # TODO
         if self.request.user.pk and not self.request.user.is_superuser:
             pk = self.request.user.pk

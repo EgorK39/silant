@@ -70,6 +70,7 @@ export default function AuthPage(props) {
             }))
             // TODO
             navigate('/manager', {replace: true})
+            navigate(0)
             // TODO navigate('/')
         }
     }

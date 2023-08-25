@@ -19,6 +19,7 @@ import ShowClient from "./Car/Services/ShowClient";
 import ShowCompany from "./Car/Services/ShowCompany";
 import CarEdit from './ForManager/CarEdit';
 import ToMain from "./To/ToMain";
+import ReclamationMain from "./Reclamation/ReclamationMain";
 
 export default function App(props) {
 
@@ -75,6 +76,7 @@ export default function App(props) {
                             <Route path={'manager'} element={<ManagerMain defaultURL={defaultURL}/>}/>
                             <Route path={'manager/car/:id'} element={<CarEdit defaultURL={defaultURL}/>}/>
                             <Route path={'to'} element={<ToMain defaultURL={defaultURL}/>}/>
+                            <Route path={'rec'} element={<ReclamationMain defaultURL={defaultURL}/>}/>
                         </>
                     )}
                 </Route>
