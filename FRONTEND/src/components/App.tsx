@@ -135,6 +135,7 @@ export default function App(props) {
                             <Route path={'to/:id'}
                                    element={<UpdateTo defaultURL={defaultURL} userName={userName}
                                                       groupName={groupName}/>}/>
+                            {/*<Route path={'to/'}*/}
                             <Route path={'to/show/type/:id'} element={<ShowType defaultURL={defaultURL}/>}/>
                             <Route path={'rec'}
                                    element={<ReclamationMain defaultURL={defaultURL} groupName={groupName}/>}>

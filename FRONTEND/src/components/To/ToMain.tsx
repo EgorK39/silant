@@ -3,6 +3,8 @@ import '../../styles/CarSearch.scss';
 import {useState, useEffect} from 'react';
 import {Outlet, useNavigate} from 'react-router-dom';
 import Tos from "./Tos";
+import CarCreate from "../ForManager/CarCreate";
+import CreateTo from "./CreateTo";
 
 export default function ToMain(props) {
     const [vin, setVin] = useState('');
@@ -32,6 +34,8 @@ export default function ToMain(props) {
     const [isReady, setIsReady] = useState(false)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+
+    const [addTo, setAddTo] = useState<boolean>(false)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -384,6 +388,21 @@ export default function ToMain(props) {
                             ? btn() : setIsFiltered(false)
                     }} className={'btnVin'}>Поиск
                     </button>
+                </div>
+                <div>
+                    <button className={'btnAddCar'}
+                            onClick={e => {
+                                setAddTo(!addTo)
+                            }}>Добавить новое ТО
+                    </button>
+                    {addTo && (
+                        <>
+                            <h3 className={'myH'}>Добавить TO:</h3>
+                            <CreateTo defaultURL={props.defaultURL}
+                            />
+                        </>
+                    )}
+
                 </div>
                 <h3 className={'myH'}>Результат поиска:</h3>
                 <div className={'textInCarSearch'}>

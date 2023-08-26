@@ -315,7 +315,7 @@ export default function UpdateTo(props) {
         <div
             className={'carEdit'}>{(to && (type.length > 1) && (company.length > 1) && (autos.length > 1)) ? (
             <>
-                <h3>Обновить информацию о машине</h3>
+                <h3>Обновить информацию о ТО</h3>
                 <button className={'btnVin'} onClick={e => goBack()}>Назад</button>
                 <div className={'myMainEdit'}>
                     <div className={'carEditDiv'}>
@@ -452,7 +452,7 @@ export default function UpdateTo(props) {
                         />
                         {(toggleWho || toggleWhoTwo) && (
                             <ul onClick={event => {
-                                myCompanyToggleFunc(event.target)
+                                myWhoToggleFunc(event.target)
 
                             }}
                                 onMouseOver={event => {

@@ -404,10 +404,15 @@ export default function UpdateRec(props) {
                         <p>Узел отказа</p>
                         <input className={'vinInput hovered'}
                                name={'nodeOfRejection'}
-                               value={rejectionMod ? rejectionMod : rejection.length > 1 ? rec['nodeOfRejection'].map((e, i) => {
-                                       rejection.find(rejection => rejection.id === e).name
-                                   }
-                               ) : rec['nodeOfRejection'][0]}
+                               // value={rejectionMod ? rejectionMod : rejection.length > 1 ? rec['nodeOfRejection'].map((e, i) =>
+                               //     <span key={i}>
+                               //          {rejection.find(rejection => rejection.id === e).name}
+                               //      </span>
+                               // ) : rec['nodeOfRejection'][0]}
+                               // value={recoveryMod ? recoveryMod : recovery.length > 1 ? rec['recovery'][0] : rec['recovery'][0]}
+                               value={rejectionMod ? rejectionMod : rejection.length > 1 ? rejection.find(
+                                   rejection => rejection.id === rec['nodeOfRejection'][0]
+                               ).name : rec['nodeOfRejection'][0]}
                                placeholder={'Узел отказа'}
                                onClick={e => {
                                    setToggleRejection(!toggleRejection)
@@ -465,10 +470,10 @@ export default function UpdateRec(props) {
                         <p>Способ восстановления</p>
                         <input className={'vinInput hovered'}
                                name={'recovery'}
-                               value={recoveryMod ? recoveryMod : recovery.length > 1 ? rec['recovery'].map((e, i) => {
-                                       recovery.find(recovery => recovery.id === e).name
-                                   }
-                               ) : rec['recovery'][0]}
+                               // value={recoveryMod ? recoveryMod : recovery.length > 1 ? rec['recovery'][0] : rec['recovery'][0]}
+                               value={recoveryMod ? recoveryMod : rejection.length > 1 ? recovery.find(
+                                   recovery => recovery.id === rec['recovery'][0]
+                               ).name : rec['recovery'][0]}
                                placeholder={'Способ восстановления'}
                                onClick={e => {
                                    setToggleRecovery(!toggleRecovery)
