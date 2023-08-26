@@ -19,8 +19,8 @@ export default function ManagerCars(props) {
                 (props.client.length > 1) && (props.technic.length > 1) && (props.engine.length > 1) &&
                 (props.transmission.length > 1) && (props.controlledbridge.length > 1) &&
                 (props.drivingbridge.length > 1)) ?
-                <div className={'carNonFiltered'}>
-                    <table className={'myTable'}>
+                <div className={'carNonFilteredMan'}>
+                    <table className={'myTableNew'}>
                         <thead>
                         <tr>
                             <td>Зав. № машины</td>

@@ -407,3 +407,106 @@ class ReclamationViewSet(mixins.CreateModelMixin,
             return Reclamation.objects.all()
         else:
             return Exception('error')
+
+    def create(self, request, *args, **kwargs):
+        if IsCompanyOrNothing().has_permission(request=self.request, view=ToViewSet):
+            if request.data:
+                pk = request.user.pk
+                print(f'METHOD: {self.allowed_methods}')
+
+                print(f'data: {request.data}')
+                print(f'PK: {request.user.pk}')
+                print(f'csrfmiddlewaretoken: {request.data.get("csrfmiddlewaretoken")}')
+                print(f'dateOfTo: {request.data.get("dateOfTo")}')
+                print(f'work: {request.data.get("work")}')
+                print(f'order: {request.data.get("order")}')
+                print(f'data_dateOfOrder: {request.data.get("dateOfOrder")}')
+                print(f'to: {request.data.get("to")}')
+                print(f'whoMakeTo: {request.data.get("whoMakeTo")}')
+                print(f'data_car: {request.data.get("car")}')
+                print(f'data_com: {request.data.get("serviceCompany")}')
+
+                csrfmiddlewaretoken = request.data.get("csrfmiddlewaretoken")
+                dateOfRejection = request.data.get("dateOfRejection")
+                work = request.data.get("work")
+                description = request.data.get("description")
+                spareParts = request.data.get("spareParts")
+                DateOfRestoration = request.data.get("DateOfRestoration")
+                downtime = request.data.get("downtime")
+                car = request.data.get("car")
+                serviceCompany = request.data.get("serviceCompany")
+                nodeOfRejection = request.data.get("nodeOfRejection")
+                recovery = request.data.get("recovery")
+
+                print(f'nodeOfRejection: {nodeOfRejection}')
+
+                current_com_name = ModelOfServiceCompany.company.get(namesOfUsers__pk=pk)
+                current_com_id = ModelOfServiceCompany.company.get(namesOfUsers__pk=pk).id
+                print(f'current_com_name: {current_com_name}')
+                print(f'current_com_id: {current_com_id}')
+                currenServiceCompany = Car.objects.get(pk=car).serviceCompany.id
+                if Car.objects.get(pk=car) in Car.objects.filter(serviceCompany__namesOfUsers=User.objects.get(pk=pk)):
+                    print("TRUE")
+                    serializer = self.get_serializer(data={
+                        'csrfmiddlewaretoken': csrfmiddlewaretoken, 'dateOfRejection': dateOfRejection, 'work': work,
+                        'description': description, 'spareParts': spareParts, 'DateOfRestoration': DateOfRestoration,
+                        'downtime': downtime,
+                        'car': car, 'serviceCompany': currenServiceCompany, 'nodeOfRejection': nodeOfRejection,
+                        'recovery': recovery
+                    })
+                    serializer.is_valid(raise_exception=True)
+                    self.perform_create(serializer)
+                    headers = self.get_success_headers(serializer.data)
+                    return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+                else:
+                    print('FALSE')
+                    serializer = self.get_serializer(data={
+                        'csrfmiddlewaretoken': csrfmiddlewaretoken, 'dateOfRejection': dateOfRejection, 'work': work,
+                        'description': description, 'spareParts': spareParts, 'DateOfRestoration': DateOfRestoration,
+                        'downtime': downtime,
+                        'car': car, 'serviceCompany': currenServiceCompany, 'nodeOfRejection': nodeOfRejection,
+                        'recovery': recovery
+                    })
+                    serializer.is_valid(raise_exception=True)
+                    return Response(serializer.data, status=status.HTTP_303_SEE_OTHER,
+                                    headers={'error': "You need to choose one of your company's machines"})
+
+        elif IsManagerOrNothing().has_permission(request=self.request, view=ToViewSet):
+            if request.data:
+                PK = request.user.pk
+                csrfmiddlewaretoken = request.data.get("csrfmiddlewaretoken")
+                dateOfRejection = request.data.get("dateOfRejection")
+                work = request.data.get("work")
+                description = request.data.get("description")
+                spareParts = request.data.get("spareParts")
+                DateOfRestoration = request.data.get("DateOfRestoration")
+                downtime = request.data.get("downtime")
+                car = request.data.get("car")
+                serviceCompany = request.data.get("serviceCompany")
+                nodeOfRejection = request.data.get("nodeOfRejection")
+                recovery = request.data.get("recovery")
+
+                # TODO current_com_name = ModelOfServiceCompany.company.get(namesOfUsers__pk=pk)
+                # TODO current_com_id = ModelOfServiceCompany.company.get(namesOfUsers__pk=pk).id
+                current_com_id = Car.objects.get(pk=car).serviceCompany.pk
+
+                print("TRUE")
+                serializer = self.get_serializer(data={
+                    'csrfmiddlewaretoken': csrfmiddlewaretoken, 'dateOfRejection': dateOfRejection, 'work': work,
+                    'description': description, 'spareParts': spareParts, 'DateOfRestoration': DateOfRestoration,
+                    'downtime': downtime,
+                    'car': car, 'serviceCompany': current_com_id, 'nodeOfRejection': nodeOfRejection,
+                    'recovery': recovery
+                })
+                serializer.is_valid(raise_exception=True)
+                self.perform_create(serializer)
+                headers = self.get_success_headers(serializer.data)
+                return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+        # else:
+        #     serializer = self.get_serializer(data=request.data)
+        #     serializer.is_valid(raise_exception=True)
+        #     self.perform_create(serializer)
+        #     headers = self.get_success_headers(serializer.data)
+        #
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

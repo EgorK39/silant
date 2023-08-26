@@ -121,3 +121,22 @@
     }
   }
 }
+
+@media screen and (max-width: 320px) {
+  .myHeader {
+    .firstHeaderBlock {
+      flex-direction: column;
+      align-items: center;
+
+      .mainThem {
+        margin: 0 0 5px 0;
+      }
+
+      .mainThema2 {
+        width: 220px;
+        margin: 0 0 5px 0;
+      }
+    }
+  }
+
+}

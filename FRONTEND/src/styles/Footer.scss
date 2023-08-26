@@ -55,3 +55,22 @@
     }
   }
 }
+
+
+@media screen and (max-width: 320px) {
+  .myFooter {
+    .mainFooter {
+      flex-direction: column;
+
+      .firstDivBlock {
+        width: 225px;
+        margin: 5px;
+      }
+
+      .secondDivBlock {
+        width: 225px;
+        margin: 5px;
+      }
+    }
+  }
+}

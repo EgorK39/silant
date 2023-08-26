@@ -126,3 +126,29 @@
     }
   }
 }
+
+
+@media screen and (max-width: 320px) {
+  .modalBackground {
+    .modalActive {
+      position: absolute;
+      width: 290px;
+      height: 495px;
+      top: calc(50% - 270px);
+      left: calc(50% - 155px);
+      border-radius: 10px;
+      background-color: #EBE6D6;
+      cursor: default;
+      padding: 40px 10px;
+
+      .modalWindow {
+        .loginDiv {
+          .vinInput {
+            width: 17rem;
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -3,6 +3,8 @@ import '../../styles/CarSearch.scss';
 import {useState, useEffect} from 'react';
 import {Outlet, useNavigate} from 'react-router-dom';
 import Rec from './Rec';
+import CreateTo from "../To/CreateTo";
+import CreateRec from "./CreateRec";
 
 export default function ReclamationMain(props) {
     const [searchURL, setSearchURL] = useState<string>('');
@@ -37,6 +39,21 @@ export default function ReclamationMain(props) {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     const navigate = useNavigate();
+    const [addRec, setAddRec] = useState<boolean>(false)
+
+    const [hasPerm, setHasPerm] = useState(false)
+
+    useEffect(() => {
+        if (props.groupName) {
+            if (props.groupName === 'client') {
+                console.log('client')
+                setHasPerm(false)
+            } else if (props.groupName === 'manager' || props.groupName === 'organization') {
+                console.log('manOrOrgan')
+                setHasPerm(true)
+            }
+        }
+    }, [])
 
     useEffect(() => {
         console.log(isReady)
@@ -449,6 +466,24 @@ export default function ReclamationMain(props) {
                     }} className={'btnVin'}>Поиск
                     </button>
                 </div>
+                {hasPerm && (
+                    <div>
+                        <button className={'btnAddCar'}
+                                onClick={e => {
+                                    setAddRec(!addRec)
+                                }}>Добавить новую рекламацию
+                        </button>
+                        {addRec && (
+                            <>
+                                <h3 className={'myH'}>Добавить рекламацию:</h3>
+                                <CreateRec defaultURL={props.defaultURL}
+                                />
+                            </>
+                        )}
+
+                    </div>
+                )}
+
                 <h3 className={'myH'}>Результат поиска:</h3>
                 <div className={'textInCarSearch'}>
                     <span>Информация о жалобах</span>

@@ -7,24 +7,25 @@ export default function NavBar(props) {
         console.log(props.userName)
     }, [])
     return (
-        <div>
-            <p>{props.userName}</p>
-            <div>
-                <ul>
+        <div className={'navBar'}>
+            <p className={'navP'}>{props.userName}</p>
+            <div className={'navBarDiv'}>
+                <ul className={'navBarUl'}>
                     <li><Link to={'/manager'}>
-                        <button>Общая информация</button>
+                        <button className={'navBarBtn'}>Общая информация</button>
                     </Link></li>
+                    <li>
+                        <Link to={'/to'}>
+                            <button className={'navBarBtn'}>TO</button>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to={'/rec'}>
+                            <button className={'navBarBtn'}>Рекламации</button>
+                        </Link>
+                    </li>
                 </ul>
-                <li>
-                    <Link to={'/to'}>
-                        <button>TO</button>
-                    </Link>
-                </li>
-                <li>
-                    <Link to={'/rec'}>
-                        <button>Рекламации</button>
-                    </Link>
-                </li>
+
 
             </div>
         </div>
