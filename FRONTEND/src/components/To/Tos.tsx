@@ -29,6 +29,7 @@ export default function Tos(props) {
                                 <td>Организация, проводившая ТО</td>
                                 <td>Машина</td>
                                 <td>Сервисная компания</td>
+                                <td></td>
 
                             </tr>
                             </thead>
@@ -52,6 +53,7 @@ export default function Tos(props) {
                                         to={`/car/company/${el['serviceCompany']}`}>{props.company ? props.company.find(
                                         company => company.id === el['serviceCompany']
                                     ).name : el['serviceCompany']}</Link></td>
+                                    <td><Link to={`/to/${el['id']}`}>Подробнее</Link></td>
                                 </tr>
                             )}
 

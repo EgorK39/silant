@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../../styles/CarSearch.scss';
 import {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Outlet, useNavigate} from 'react-router-dom';
 import Tos from "./Tos";
 
 export default function ToMain(props) {
@@ -244,6 +244,7 @@ export default function ToMain(props) {
             <div className={'carSearchMain'}>
                 {isAuthenticated ? <h3 className={'myH'}>Информация о проведенных ТО Вашей техники</h3> :
                     <h3 className={'myH'}>Информация о проведенных ТО</h3>}
+                <Outlet/>
                 <div className={'inAndBtn'}>
                     <input className={'vinInput'}
                            name={'vin'}

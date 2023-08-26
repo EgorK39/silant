@@ -23,6 +23,9 @@ import ReclamationMain from "./Reclamation/ReclamationMain";
 import ShowRejection from "./Reclamation/Services/ShowRejection";
 import ShowRecovery from "./Reclamation/Services/ShowRecovery";
 import ShowType from "./To/Services/ShowType";
+import NavBar from "./Header/NavBar";
+import UpdateTo from "./To/UpdateTo";
+import UpdateRec from "./Reclamation/UpdateRec";
 
 export default function App(props) {
 
@@ -30,6 +33,8 @@ export default function App(props) {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [userName, setUserName] = useState<string>('')
+    const [groupName, setGroupName] = useState<string>('')
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -85,6 +90,7 @@ export default function App(props) {
                     .then(data => {
                         console.log(data.name)
                         setUserName(data.name)
+                        setGroupName(data.group)
                     })
 
                     .catch(err =>
@@ -97,7 +103,8 @@ export default function App(props) {
         <>
             <Routes>
                 <Route path={'/'} element={<Header isAuthenticated={isAuthenticated}/>}>
-                    <Route index element={<CarMain defaultURL={defaultURL} isAuthenticated={isAuthenticated}/>}/>
+                    <Route index element={<CarMain defaultURL={defaultURL} isAuthenticated={isAuthenticated}
+                                                   userName={userName}/>}/>
                     <Route path={'car/:id'}
                            element={<DetailCar defaultURL={defaultURL} isAuthenticated={isAuthenticated}/>}/>
                     <Route path={'car/technic/:id'}
@@ -117,11 +124,24 @@ export default function App(props) {
                                    element={<ShowClient defaultURL={defaultURL} isAuthenticated={isAuthenticated}/>}/>
                             <Route path={'car/company/:id'}
                                    element={<ShowCompany defaultURL={defaultURL} isAuthenticated={isAuthenticated}/>}/>
-                            <Route path={'manager'} element={<ManagerMain defaultURL={defaultURL}/>}/>
+                            <Route path={'manager'} element={<ManagerMain defaultURL={defaultURL}/>}>
+                                <Route index element={<NavBar defaultURL={defaultURL} userName={userName}/>}/>
+                            </Route>
                             <Route path={'manager/car/:id'} element={<CarEdit defaultURL={defaultURL}/>}/>
-                            <Route path={'to'} element={<ToMain defaultURL={defaultURL}/>}/>
+                            <Route path={'to'} element={<ToMain defaultURL={defaultURL} groupName={groupName}/>}>
+                                <Route index element={<NavBar defaultURL={defaultURL} userName={userName}/>}/>
+
+                            </Route>
+                            <Route path={'to/:id'}
+                                   element={<UpdateTo defaultURL={defaultURL} userName={userName}
+                                                      groupName={groupName}/>}/>
                             <Route path={'to/show/type/:id'} element={<ShowType defaultURL={defaultURL}/>}/>
-                            <Route path={'rec'} element={<ReclamationMain defaultURL={defaultURL}/>}/>
+                            <Route path={'rec'}
+                                   element={<ReclamationMain defaultURL={defaultURL} groupName={groupName}/>}>
+                                <Route index element={<NavBar defaultURL={defaultURL} userName={userName}/>}/>
+                            </Route>
+                            <Route path={'rec/:id'} element={<UpdateRec defaultURL={defaultURL} userName={userName}
+                                                                        groupName={groupName}/>}/>
                             <Route path={'rec/show/rejection/:id'} element={<ShowRejection defaultURL={defaultURL}/>}/>
                             <Route path={'rec/show/recovery/:id'} element={<ShowRecovery defaultURL={defaultURL}/>}/>
                         </>

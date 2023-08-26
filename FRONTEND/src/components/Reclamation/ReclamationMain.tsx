@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../../styles/CarSearch.scss';
 import {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Outlet, useNavigate} from 'react-router-dom';
 import Rec from './Rec';
 
 export default function ReclamationMain(props) {
@@ -302,6 +302,7 @@ export default function ReclamationMain(props) {
             <div className={'carSearchMain'}>
                 {isAuthenticated ? <h3 className={'myH'}>Рекламации</h3> :
                     <h3 className={'myH'}>Рекламации</h3>}
+                <Outlet/>
                 <div className={'inAndBtn'}>
                     {/*<input className={'vinInput'}*/}
                     {/*       name={'vin'}*/}
@@ -461,6 +462,8 @@ export default function ReclamationMain(props) {
                          rejection={rejection}
                          recovery={recovery}
                          company={company}
+                         groupName={props.groupName}
+
                     />
                 ) : (allRec && (autos.length >= 1) && (rejection.length >= 1) && (recovery.length >= 1) && (company.length >= 1)) ? (
                     <Rec allRec={allRec}
@@ -468,6 +471,7 @@ export default function ReclamationMain(props) {
                          rejection={rejection}
                          recovery={recovery}
                          company={company}
+                         groupName={props.groupName}
                     />
                 ) : ''
             }

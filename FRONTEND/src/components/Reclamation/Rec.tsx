@@ -1,9 +1,10 @@
 import * as React from "react";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 
 export default function Tos(props) {
     const navigate = useNavigate();
+    const [isCan, setIsCan] = useState<boolean>(false)
     const goBack = () => navigate(-1);
     const {id} = useParams();
     useEffect(() => {
@@ -13,6 +14,14 @@ export default function Tos(props) {
         console.log(props.autos)
         console.log(props.recovery)
 
+    }, [])
+
+    useEffect(() => {
+        if (props.groupName) {
+            if (props.groupName === 'manager' || props.groupName === 'organization') {
+                setIsCan(true)
+            }
+        }
     }, [])
     return (
         ((props.allRec == null && !props.recovery.length && !props.company.length && !props.autos.length && !props.rejection.length) ?
@@ -62,6 +71,9 @@ export default function Tos(props) {
                                         to={`/car/company/${el['serviceCompany']}`}>{props.company ? props.company.find(
                                         company => company.id === el['serviceCompany']
                                     ).name : el['serviceCompany']}</Link></td>
+                                    {isCan && (
+                                        <td><Link to={`/rec/${el.id}`}>Подробнее</Link></td>
+                                    )}
                                 </tr>
                             )}
 

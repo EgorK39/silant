@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../../styles/ManagerMain.scss';
 import {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Outlet, useNavigate} from 'react-router-dom';
 import Cars from '../Car/Cars';
 import ManagerCars from './ManagerCars';
 import CarCreate from "./CarCreate";
@@ -361,6 +361,7 @@ export default function ManagerMain(props) {
         <section className={'managerSection'}>
             <div className={'managerMain'}>
                 <h3 className={'myH'}>Главная страница менеджера</h3>
+                <Outlet/>
                 <div className={'inAndBtn'}>
                     <input className={'vinInput'}
                            name={'vin'}

@@ -105,13 +105,13 @@ class CarsViewSet(viewsets.ReadOnlyModelViewSet):
         print(user)
         if User.objects.get(pk=user).groups.filter(name='client').exists():
             name = ModelOfClients.client.get(namesOfUsers=User.objects.get(pk=user)).name
-            return Response({'name': name})
+            return Response({'name': name, 'group': 'client'})
         elif User.objects.get(pk=user).groups.filter(name='organization').exists():
             name = ModelOfServiceCompany.company.get(namesOfUsers=User.objects.get(pk=user)).name
-            return Response({'name': name})
+            return Response({'name': name, 'group': 'organization'})
         else:
             name = User.objects.get(pk=user).username
-            return Response({'name': name})
+            return Response({'name': name, 'group': 'manager'})
 
     @action(methods=['get'], detail=False)
     def client(self, request):

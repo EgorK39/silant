@@ -2,7 +2,8 @@ import * as React from 'react';
 import '../../styles/CarSearch.scss';
 import {useState, useEffect, lazy} from "react";
 import Cars from './Cars';
-import {useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
+import NavBar from "../Header/NavBar";
 
 export default function CarSearch(props) {
     const [vin, setVin] = useState('');
@@ -186,6 +187,7 @@ export default function CarSearch(props) {
         navigate('/auth', {replace: true})
         navigate(0)
     }
+
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('token'))
         if (token.access) {
@@ -208,6 +210,8 @@ export default function CarSearch(props) {
                         console.log(res)
                         setAllCars(await res.json());
                         setIsReady(true)
+                        setIsAuthenticated(true)
+
                     }
                 })
 
@@ -329,6 +333,9 @@ export default function CarSearch(props) {
                         техники Силант</h3> :
                     <h3 className={'myH'}>Проверьте комплектацию и технические характеристики
                         техники Силант</h3>}
+                {isAuthenticated && (
+                    <NavBar userName={props.userName}/>
+                )}
                 <div className={'inAndBtn'}>
                     <input className={'vinInput'}
                            name={'vin'}
