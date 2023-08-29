@@ -342,6 +342,37 @@ export default function CreateRec(props) {
 
     const goBack = () => navigate(-1);
 
+    const [today, setToday] = useState<string>('')
+    const [dateErrorDateOfRejection, setDateErrorDateOfRejection] = useState<string>('')
+    const [dateErrorDateOfRestoration, setDateErrorDateOfRestoration] = useState<string>('')
+
+
+    useEffect(() => {
+        setToday(new Date().toISOString().substring(0, 10))
+    }, [])
+    const changeDate = (target) => {
+        switch (target.name) {
+            case 'dateOfRejection':
+                if (Date.parse(target.value) > Date.parse(today)) {
+                    setDateErrorDateOfRejection('Введите корректные данные')
+                    setDateOfRejectionMod('')
+                } else {
+                    setDateOfRejectionMod(target.value)
+                    setDateErrorDateOfRejection('')
+                }
+                break;
+            case 'DateOfRestoration':
+                if (Date.parse(target.value) > Date.parse(today)) {
+                    setDateErrorDateOfRestoration('Введите корректные данные')
+                    setDateOfRestoration('')
+                } else {
+                    setDateOfRestoration(target.value)
+                    setDateErrorDateOfRestoration('')
+                }
+                break;
+        }
+    }
+
     return (
         <>
             <div
@@ -359,11 +390,15 @@ export default function CreateRec(props) {
                                    placeholder={'Дата отказа'}
                                    maxLength={25}
                                    onChange={event => {
-                                       setDateOfRejectionMod(event.target.value)
+                                       // setDateOfRejectionMod(event.target.value)
+                                       changeDate(event.target)
                                    }}
                                    type={"date"}
 
                             />
+                            {dateErrorDateOfRejection && (
+                                <p className={'errorP'}>{dateErrorDateOfRejection}</p>
+                            )}
                         </div>
                         <div className={'carEditDiv'}>
                             <p>Наработка, м/час</p>
@@ -503,11 +538,15 @@ export default function CreateRec(props) {
                                    placeholder={'Дата восстановления'}
                                    maxLength={25}
                                    onChange={event => {
-                                       setDateOfRestoration(event.target.value)
+                                       // setDateOfRestoration(event.target.value)
+                                       changeDate(event.target)
                                    }}
                                    type={"date"}
 
                             />
+                            {dateErrorDateOfRestoration && (
+                                <p className={'errorP'}>{dateErrorDateOfRestoration}</p>
+                            )}
                         </div>
                         <div className={'carEditDiv'}>
                             <p>Время простоя техники</p>

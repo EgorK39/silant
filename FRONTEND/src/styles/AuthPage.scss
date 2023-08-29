@@ -128,7 +128,7 @@
 }
 
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 350px) {
   .modalBackground {
     .modalActive {
       position: absolute;
@@ -143,6 +143,12 @@
 
       .modalWindow {
         .loginDiv {
+          .vinInput {
+            width: 17rem;
+          }
+        }
+
+        .passwordDiv {
           .vinInput {
             width: 17rem;
           }

@@ -316,7 +316,7 @@ export default function ReclamationMain(props) {
     }, [])
     return (
         <>
-            <div className={'carSearchMain'}>
+            <div className={'carSearchMain add'}>
                 {isAuthenticated ? <h3 className={'myH'}>Рекламации</h3> :
                     <h3 className={'myH'}>Рекламации</h3>}
                 <Outlet/>

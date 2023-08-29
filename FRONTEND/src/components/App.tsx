@@ -26,6 +26,8 @@ import ShowType from "./To/Services/ShowType";
 import NavBar from "./Header/NavBar";
 import UpdateTo from "./To/UpdateTo";
 import UpdateRec from "./Reclamation/UpdateRec";
+import Guide from "./ForManager/Guide";
+import Create from "./ForManager/Services/Create";
 
 export default function App(props) {
 
@@ -145,6 +147,58 @@ export default function App(props) {
                                                                         groupName={groupName}/>}/>
                             <Route path={'rec/show/rejection/:id'} element={<ShowRejection defaultURL={defaultURL}/>}/>
                             <Route path={'rec/show/recovery/:id'} element={<ShowRecovery defaultURL={defaultURL}/>}/>
+                            <Route path={'manager/guide'} element={<Guide defaultURL={defaultURL} userName={userName}
+                                                                          groupName={groupName}/>}/>
+
+
+                            <Route path={'manager/guide/createTechnic'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/technic/:id'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/createEngine'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/engine/:id'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/createTransmission'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/transmission/:id'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/createDrbridge'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/drbridge/:id'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/createCobridge'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/cobridge/:id'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/createType'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/type/:id'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/createRejection'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/rejection/:id'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/createRecovery'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
+                            <Route path={'manager/guide/recovery/:id'}
+                                   element={<Create defaultURL={defaultURL} userName={userName}
+                                                    groupName={groupName}/>}/>
                         </>
                     )}
                 </Route>

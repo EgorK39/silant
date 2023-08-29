@@ -245,7 +245,7 @@ export default function ToMain(props) {
     }, [])
     return (
         <>
-            <div className={'carSearchMain'}>
+            <div className={'carSearchMain add'}>
                 {isAuthenticated ? <h3 className={'myH'}>Информация о проведенных ТО Вашей техники</h3> :
                     <h3 className={'myH'}>Информация о проведенных ТО</h3>}
                 <Outlet/>

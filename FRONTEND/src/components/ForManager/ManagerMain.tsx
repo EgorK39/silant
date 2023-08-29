@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../../styles/ManagerMain.scss';
 import {useEffect, useState} from 'react';
-import {Outlet, useNavigate} from 'react-router-dom';
+import {Link, Outlet, useNavigate} from 'react-router-dom';
 import Cars from '../Car/Cars';
 import ManagerCars from './ManagerCars';
 import CarCreate from "./CarCreate";
@@ -557,6 +557,11 @@ export default function ManagerMain(props) {
                         </>
                     )}
 
+                </div>
+                <div><Link to={'guide'}>
+                    <button className={'btnAddCar'}>Справочник
+                    </button>
+                </Link>
                 </div>
                 <h3 className={'myH'}>Результат поиска:</h3>
                 <div className={'textInCarSearch'}>

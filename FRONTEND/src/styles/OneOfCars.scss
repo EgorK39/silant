@@ -40,3 +40,65 @@
     }
   }
 }
+
+
+@media screen and (max-width: 1200px) {
+  .myDetailCar {
+    .carNonFiltered1200 {
+      background-color: white;
+      width: 95%;
+      border: solid 2px #163E6C;
+      border-radius: 7px;
+      margin: 10px 0 10px 0;
+      display: flex;
+      justify-content: center;
+
+      .tableDiv1200 {
+        border: solid 2px #163E6C;
+        border-radius: 7px;
+        width: 350px;
+
+        .myTable {
+          margin: 0 3px 6px 3px;
+          table-layout: fixed;
+          border-collapse: collapse;
+          width: 98%;
+
+          tr {
+            text-align: center;
+            position: relative;
+
+            td:first-child {
+              border-bottom: 2px solid #163E6C;
+              height: 25px;
+              border-right: 2px solid #163E6C;
+              text-overflow: ellipsis;
+              overflow: hidden;
+
+              &:hover {
+                overflow: inherit;
+              }
+            }
+
+            td:last-child {
+              border-bottom: 2px solid #163E6C;
+              height: 25px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+
+              &:hover {
+                overflow: inherit;
+                background: white;
+                z-index: 1;
+              }
+
+
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+}
